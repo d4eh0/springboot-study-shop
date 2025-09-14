@@ -11,13 +11,14 @@
 
 ---
 
-## 📌 Features
-- 상품 등록 / 수정 / 삭제 (CRUD)
-- 상품 상세 조회
-- 회원가입 & 로그인 (Spring Security, JWT, Session)
-- 이미지 업로드 (AWS S3)
-- 배포 (AWS EC2)
+## 📌 What I Learned
+- Spring Boot 기반 웹 서버와 REST API 설계
+- MySQL 연동 및 JPA/Hibernate 활용 -> CRUD
 - 예외 처리 및 DTO 적용
+- Thymeleaf 템플릿 엔진
+- 회원 인증/인가 처리 (Spring Security, JWT)
+- AWS EC2 -> 배포
+- AWS S3 -> 이미지 업로드
 
 ---
 
@@ -32,11 +33,3 @@
 - **Cloud**: AWS (EC2, S3)
 - **Build Tool**: Gradle
 
----
-
-## 📚 Learning Goals
-- Spring Boot 기반 웹 서버와 REST API 설계
-- MySQL 연동 및 JPA/Hibernate 활용
-- Thymeleaf 템플릿 엔진 사용
-- 회원 인증/인가 처리 (Spring Security, JWT)
-- AWS EC2/S3 배포
