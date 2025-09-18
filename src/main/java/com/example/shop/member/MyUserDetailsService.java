@@ -21,7 +21,6 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // DB에서 username을 가진 유저를 찾아와서
         var result = memberRepository.findByUsername(username);
         if (result.isEmpty()) {
             throw new UsernameNotFoundException("없는 회원입니다.");
