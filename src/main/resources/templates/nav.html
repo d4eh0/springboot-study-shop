@@ -1,6 +1,6 @@
 <div class="nav" th:fragment="navbar">
-    <a class="logo" href="/list">SpringMall</a>
-    <a href="/list">List</a>
+    <a class="logo" href="/list/page/1">SpringMall</a>
+    <a href="/list/page/1">List</a>
     <a href="/write">Write</a>
     <div sec:authorize="isAnonymous()" >
         <a href="/login">Login</a>
@@ -9,7 +9,7 @@
     <div sec:authorize="isAuthenticated()">
         <a href="/logout">Logout</a>
         <a href="/my-page">
-            Hello, <span sec:authentication="principal.username"></span> !
+             <span class="rainbow-text"> Hello, <span sec:authentication="principal.username"></span> !</span>
         </a>
     </div>
 </div>
