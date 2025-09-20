@@ -16,6 +16,7 @@ p {
     border-radius: 8px; /* 선택사항: 둥글게 */
 }
 
+/* nav */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap');
 .nav {
     display: flex;
@@ -38,6 +39,29 @@ p {
     letter-spacing : -0.5px;
 }
 
+.nav a:visited {
+    color: #333; /* 방문 후에도 동일한 색 */
+}
+
+/*============================================================*/
+.rainbow-text {
+    margin-left: 10px;
+    background: linear-gradient(
+            90deg,
+            red, orange, yellow, green, blue, indigo, violet
+    );
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbowMove 6s ease infinite;
+}
+
+@keyframes rainbowMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+/*============================================================*/
 input, button {
     padding : 8px 13px;
     margin-top : 5px;
@@ -62,3 +86,45 @@ input {
     display : block;
     margin : auto;
 }
+
+/* 페이지네이션 */
+/* 페이지네이션 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 4px;               /* 버튼 간격 조금 넓힘 */
+    margin: 40px 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.pagination a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid #ddd;
+    border-radius: 15%;     /* 둥근 버튼 */
+    background: #fff;
+    color: #333;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;  /* 밑줄 제거 */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.pagination a:hover {
+    background: #f0f4ff;
+    color: #007bff;
+    border-color: #007bff;
+}
+
+.pagination a.active {
+    background: #007bff;
+    color: #fff;
+    border-color: #007bff;
+    font-weight: 600;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+}
+
+/**/

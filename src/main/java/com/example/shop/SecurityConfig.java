@@ -24,7 +24,7 @@ public class SecurityConfig {
                 authorize.requestMatchers("/**").permitAll()
         );
         http.formLogin((formLogin) -> formLogin.loginPage("/login")
-                .defaultSuccessUrl("/list")
+                .defaultSuccessUrl("/list/page/1")
                 //.failureUrl("/fail") // 실패시 기본적으로 /login?error로 이동
         );
         http.logout( logout -> logout.logoutUrl("/logout") );
