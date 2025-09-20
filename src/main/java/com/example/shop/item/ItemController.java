@@ -97,5 +97,13 @@ public class ItemController {
         itemRepository.deleteById(id);
         return ResponseEntity.status(200).body("삭제완료");
     }
+
+    /* ====== 상품 검색 ====== */
+    @PostMapping("/search")
+    public String postSearch(String searchText) {
+        List<Item> result = itemRepository.findAllByTitleContains(searchText);
+        System.out.println(result);
+        return "redirect:/list/page/1";
+    }
     // TODO: 컨트롤러 서비스 분리
 }
