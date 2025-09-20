@@ -1,3 +1,8 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* 상품목록 */
 .card {
     margin: 30px auto;
     display: flex;
@@ -127,4 +132,66 @@ input {
     box-shadow: 0 3px 6px rgba(0,0,0,0.15);
 }
 
-/**/
+/* 댓글 작성 폼 */
+.comment-form {
+    margin-top: 15px;
+    border: 1px solid #eee;
+    padding: 10px;
+    border-radius: 6px;
+    background: #fafafa;
+    font-family: 'Montserrat', sans-serif;
+
+    display: flex;          /* 가로 배치 */
+    align-items: center;    /* 세로 가운데 정렬 */
+    gap: 8px;               /* 입력창과 버튼 간격 */
+}
+
+.comment-form textarea {
+    flex: 1;                /* 남는 공간 다 차지 */
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+    font-size: 14px;
+    height: 40px;           /* 버튼 높이랑 맞추기 */
+}
+
+.comment-form button {
+    padding: 8px 14px;
+    border: 1px solid #ccc;
+    background: #fff;
+    color: #000;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    height: 40px;           /* textarea 높이랑 맞춤 */
+}
+
+.comment-form button:hover {
+    background: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+/* 댓글 목록 */
+.comment-list {
+    display: flex;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.comment-username {
+    font-weight: 600;
+    color: #333;
+    margin-right: 10px;   /* 이름과 내용 사이 간격 */
+    min-width: 80px;      /* 이름 영역 고정 너비 */
+}
+
+.comment-content {
+    color: #555;
+    flex: 1;              /* 남은 공간 다 차지 */
+}

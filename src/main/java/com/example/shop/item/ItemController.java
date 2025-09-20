@@ -1,5 +1,7 @@
 package com.example.shop.item;
 
+import com.example.shop.comment.Comment;
+import com.example.shop.comment.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,7 +19,9 @@ public class ItemController {
 
     private final ItemRepository itemRepository; // 리포지토리 등록
     private final ItemService itemService;
+    private final CommentRepository commentRepository;
 
+    /* ====== 상품리스트 ====== */
     @GetMapping("/list")
     public String list(Model model) {
         List<Item> result = itemRepository.findAll();
@@ -31,11 +35,10 @@ public class ItemController {
         model.addAttribute("items", result);
         model.addAttribute("currentPage", result.getNumber() + 1);
         model.addAttribute("totalPage", (int) result.getTotalPages() + 1);
-        System.out.println("totalPages = " + result.getTotalPages());
-        System.out.println("totalPages = " + (int) result.getTotalPages());
         return "list.html";
     }
 
+    /* ====== 상품 추가 ====== */
     @GetMapping("/write")
     public String write() {
         return "write.html";
@@ -48,11 +51,12 @@ public class ItemController {
         return "redirect:/list";
     }
 
+    /* ====== 상품 상세 ====== */
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable Long id, Model model) {
 
-        // try {
-            // throw new Exception("안녕 나는 에러");
+            List<Comment> comments = commentRepository.findAllByParentId(id);
+            model.addAttribute("comments", comments);
             Optional<Item> result = itemRepository.findById(id);
             if ( result.isPresent()) {
                 model.addAttribute("item", result.get());
@@ -60,12 +64,9 @@ public class ItemController {
             } else {
                 return "redirect:/list";
             }
-        // } catch (Exception e) {
-            // System.out.println(e.getMessage());
-            // return ResponseEntity.status(400).body("에러남 ㅅㄱ");
-        // }
     }
 
+    /* ====== 상품 편집 ====== */
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Long id, Model model) {
         Optional<Item> result = itemRepository.findById(id);
@@ -89,12 +90,12 @@ public class ItemController {
         return "redirect:/list";
     }
 
+    /* ====== 상품 삭제 ====== */
     @DeleteMapping("/delete/{id}")
     @ResponseBody
     public ResponseEntity<String> delete(@PathVariable Long id) {
         itemRepository.deleteById(id);
         return ResponseEntity.status(200).body("삭제완료");
     }
-    // 컨트롤러 서비스 분리
-    // 제목 너무 길거나 음수면 예외처리
+    // TODO: 컨트롤러 서비스 분리
 }
