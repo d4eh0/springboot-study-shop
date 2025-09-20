@@ -18,5 +18,24 @@
     <h4 th:text="${item.title}">제목</h4>
     <p th:text="${item.price + '원'}">가격</p>
 </div>
+
+<!-- 댓글 영역 -->
+<div class="comment-section">
+    <h3>댓글</h3>
+
+    <!-- 댓글 작성 -->
+    <form class="comment-form" method="POST" action="/comment">
+        <input type="hidden" name="parentId" th:value="${item.id}">
+        <textarea name="content" rows="3" placeholder="댓글을 입력하세요"></textarea>
+        <button type="submit">등록</button>
+    </form>
+
+    <!-- 댓글 목록 -->
+    <div class="comment-list" th:each="comment : ${comments}">
+        <span class="comment-username" th:text="${comment.username}">사용자</span>
+        <span class="comment-content" th:text="${comment.content}">댓글 내용</span>
+    </div>
+</div>
+
 </body>
 </html>
