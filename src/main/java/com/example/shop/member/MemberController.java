@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequiredArgsConstructor
@@ -49,10 +50,25 @@ public class MemberController {
     @GetMapping("/my-page")
     public String myPage(Authentication auth) {
         System.out.println(auth);
-        System.out.println(auth.getName()); // 아이디출력가능
-        System.out.println(auth.isAuthenticated()); // 로그인여부 검사가능
-        System.out.println(auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER")));
-
         return "mypage.html";
+    }
+
+    @GetMapping("/user/1")
+    @ResponseBody
+    public MemberDTO getUser() {
+        var a = memberRepository.findById(1L);
+        var result = a.get();
+        var data = new MemberDTO(result.getUsername(), result.getDisplayName());
+        return data;
+    }
+}
+
+class MemberDTO {
+    public String username;
+    public String displayName;
+
+    MemberDTO(String a, String b) {
+        this.username = a;
+        this.displayName = b;
     }
 }
