@@ -43,13 +43,11 @@ public class MemberController {
     @GetMapping("/login")
     public String login() {
         var result = memberRepository.findByUsername("eogud3332");
-        System.out.println(result.get().getDisplayName());
         return "login.html";
     }
 
     @GetMapping("/my-page")
     public String myPage(Authentication auth) {
-        System.out.println(auth);
         return "mypage.html";
     }
 
