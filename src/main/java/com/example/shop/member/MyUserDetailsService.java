@@ -19,6 +19,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
 
+    // 이게 Authentication auth 파라미터에 뿅하고 들어간다.
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         var result = memberRepository.findByUsername(username);

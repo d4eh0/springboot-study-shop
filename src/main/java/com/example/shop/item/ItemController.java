@@ -26,7 +26,7 @@ public class ItemController {
     public String list(Model model) {
         List<Item> result = itemRepository.findAll();
         model.addAttribute("items", result);
-        return "list.html";
+        return "redirect:/list/page/1";
     }
 
     @GetMapping("/list/page/{pageNumber}")
@@ -48,7 +48,7 @@ public class ItemController {
     public String addPost(String title, Integer price) {
 
         itemService.saveItem(title, price);
-        return "redirect:/list";
+        return "redirect:/list/page/1";
     }
 
     /* ====== 상품 상세 ====== */
@@ -62,7 +62,7 @@ public class ItemController {
                 model.addAttribute("item", result.get());
                 return "detail.html";
             } else {
-                return "redirect:/list";
+                return "redirect:/list/page/1";
             }
     }
 
@@ -74,7 +74,7 @@ public class ItemController {
             model.addAttribute("data", result.get());
             return "edit.html";
         } else {
-            return "redirect:/list";
+            return "redirect:/list/page/1";
         }
     }
 
@@ -87,7 +87,7 @@ public class ItemController {
         item.setPrice(price);
         itemRepository.save(item);
 
-        return "redirect:/list";
+        return "redirect:/list/page/1";
     }
 
     /* ====== 상품 삭제 ====== */
@@ -100,10 +100,11 @@ public class ItemController {
 
     /* ====== 상품 검색 ====== */
     @PostMapping("/search")
-    public String postSearch(String searchText) {
-        List<Item> result = itemRepository.findAllByTitleContains(searchText);
+    public String postSearch(String searchText, Model model) {
+        var result = itemRepository.titleFullTextIndex(searchText);
+        model.addAttribute("searchResult", result);
         System.out.println(result);
-        return "redirect:/list/page/1";
+        return "search.html";
     }
     // TODO: 컨트롤러 서비스 분리
 }

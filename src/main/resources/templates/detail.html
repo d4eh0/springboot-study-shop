@@ -19,6 +19,15 @@
     <p th:text="${item.price + '원'}">가격</p>
 </div>
 
+<!-- 주문 -->
+<form method="post" action="/order">
+    <input type="hidden" name="parentId" th:value="${item.id}">
+    <input type="hidden" name="itemName" th:value="${item.title}">
+    <input type="hidden" name="price" th:value="${item.price}">
+    <input placeholder="수량" name="count" >
+    <button type="submit">주문하기</button>
+</form>
+
 <!-- 댓글 영역 -->
 <div class="comment-section">
     <h3>댓글</h3>

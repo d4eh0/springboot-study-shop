@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="/main.css" rel="stylesheet">
+</head>
+<body>
+<!-- 네비게이션 -->
+<div th:replace="~{nav.html::navbar}"></div>
+
+<!-- 검색기능 -->
+<form action="/search" method="POST">
+    <input name="searchText" style="display: inline">
+    <button type="submit">검색</button>
+</form>
+
+
+<!-- 상품 목록 -->
+<div class="card" th:each="i : ${searchResult}">
+    <img src="https://placehold.co/300">
+    <div>
+        <h4 th:text="${i.title}">바지</h4>
+        <a th:href="@{ '/detail/' + ${i.id} }">(상세보기)</a>
+        <p th:text="${i.price + '원'}">7억</p>
+        <a th:href="@{'/edit/' + ${i.id}}">✏️</a>
+        <a class="DeleteBtn" th:data-id="${i.id}" style="cursor: pointer;">❌</a>
+    </div>
+</div>
+
+<!--&lt;!&ndash; 페이지네이션 &ndash;&gt;-->
+<!--<div class="pagination">-->
+<!--    <a th:each="i : ${#numbers.sequence(1, totalPage - 1) }"-->
+<!--       th:text="${i}"-->
+<!--       th:classappend="${i == currentPage} ? 'active'"-->
+<!--       th:href="@{/list/page/{num}(num=${i})}">-->
+<!--    </a>-->
+<!--</div>-->
+
+<script>
+    document.querySelectorAll(".DeleteBtn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const id = btn.dataset.id;
+            fetch(`/delete/${id}`, { method: 'DELETE'})
+                .then(r => r.text())
+                .then(() => {
+                    console.log("삭제 완료");
+                    alert("삭제 완료");
+                    location.reload();
+                });
+        });
+    });
+</script>
+</body>
+</html>
