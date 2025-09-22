@@ -23,7 +23,7 @@ public class Sales {
 
     // N(Order) : 1(Member)
     // 한 명의 회원이 여러 개의 주문.
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "member_id",
             foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT)

@@ -2,6 +2,7 @@ package com.example.shop.sales;
 
 import com.example.shop.member.CustomUser;
 import com.example.shop.member.Member;
+import com.example.shop.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
@@ -18,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SalesController {
     private final SalesRepository salesRepository;
+    private final MemberRepository memberRepository;
 
     @PostMapping("/order")
     public String saveOrder(Authentication auth,
@@ -41,17 +43,21 @@ public class SalesController {
 
     @GetMapping("/order/all")
     public String getAllOrder(Model model) {
-        List<Sales> result = salesRepository.customFindAll();
-        List<SalesDto> a = new ArrayList<>();
-        for (Sales s : result) {
-            SalesDto dto = new SalesDto();
-            dto.itemName = s.getItemName();
-            dto.price = s.getPrice();
-            dto.username = s.getMember().getUsername();
-            a.add(dto);
-        }
-        System.out.println(a);
-        model.addAttribute("salesList", a); // 모델에 넣기
+//        List<Sales> result = salesRepository.customFindAll();
+//        List<SalesDto> a = new ArrayList<>();
+//        for (Sales s : result) {
+//            SalesDto dto = new SalesDto();
+//            dto.itemName = s.getItemName();
+//            dto.price = s.getPrice();
+//            dto.username = s.getMember().getUsername();
+//            a.add(dto);
+//        }
+        var result = memberRepository.findById(1L);
+        System.out.println(result.get().getSales());
+
+//        List<Sales> a = salesRepository.findAll();
+//        System.out.println(a.get(0));
+//        model.addAttribute("salesList", a); // 모델에 넣기
         return "sales.html";
     }
 }
