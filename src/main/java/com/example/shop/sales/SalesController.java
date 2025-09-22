@@ -1,10 +1,14 @@
 package com.example.shop.sales;
 
+import com.example.shop.member.CustomUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -17,11 +21,18 @@ public class SalesController {
         sales.setCount(count);
         sales.setPrice(price);
         sales.setItemName(itemName);
-        User user = (User) auth.getPrincipal();
-        System.out.println(user);
-        // sales.setMemberId();
-        // salesRepository.save(sales);
+        CustomUser user = (CustomUser) auth.getPrincipal();
+        // System.out.println(user.id);
+        sales.setMemberId(user.id);
+        salesRepository.save(sales);
 
-        return "list.html";
+        return "redirect:/list/page/1";
+    }
+
+    @GetMapping("/order/all")
+    public String getAllOrder() {
+        List<Sales> result = salesRepository.findAll();
+        System.out.println(result.get(0));
+        return "redirect:/list/page/1";
     }
 }
