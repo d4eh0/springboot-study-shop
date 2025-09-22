@@ -21,6 +21,8 @@ public class Sales {
     Integer price;
     Integer count;
 
+    // N(Order) : 1(Member)
+    // 한 명의 회원이 여러 개의 주문.
     @ManyToOne
     @JoinColumn(
             name = "member_id",
