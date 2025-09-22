@@ -23,7 +23,7 @@ public class SalesController {
         sales.setItemName(itemName);
         CustomUser user = (CustomUser) auth.getPrincipal();
         // System.out.println(user.id);
-        sales.setMemberId(user.id);
+        // sales.setMemberId(user.id);
         salesRepository.save(sales);
 
         return "redirect:/list/page/1";
